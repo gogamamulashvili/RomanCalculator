@@ -66,23 +66,50 @@ int calculate(int num1, int num2, string operation) {
     return result;
 }
 
+bool valid(string roman){
+    int arabic = roman_to_arabic(roman);
+    string valid_roman = arabic_to_roman(arabic);
+
+    return valid_roman == roman;
+}
+
 int main() {
     string operation;
     string roman1;
     string roman2;
     int num1;
     int num2;
+    bool ask_roman_1;
+    bool ask_roman_2;
 
 
     while (operation != "exit") {
-        cout << "enter number: ";
-        cin >> roman1;
+        ask_roman_1 = ask_roman_2 = true;
+
+        while(ask_roman_1){
+            cout << "enter number: ";
+            cin >> roman1;
+
+            if(valid(roman1)){
+                ask_roman_1 = false;
+            }else{
+                cout << "Incorrect roman, please provide correct one" << endl;
+            }
+        }
 
         cout << "enter operator(+ - / * exit): ";
         cin >> operation;
 
-        cout << "enter number: ";
-        cin >> roman2;
+        while(ask_roman_2){
+            cout << "enter number: ";
+            cin >> roman2;
+
+            if(valid(roman2)){
+                ask_roman_2 = false;
+            }else{
+                cout << "Incorrect roman, please provide correct one" << endl;
+            }
+        }
         
         num1 = roman_to_arabic(roman1);
         num2 = roman_to_arabic(roman2);
